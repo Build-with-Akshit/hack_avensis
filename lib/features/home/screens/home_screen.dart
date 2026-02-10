@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hack_avensis/core/constants/app_colors.dart';
 import 'package:hack_avensis/features/auth/screens/login_screen.dart';
 import 'package:hack_avensis/features/auth/services/auth_service.dart';
-import 'package:hack_avensis/features/map/screens/map_screen.dart'; // Will create next
+import 'package:hack_avensis/features/community/screens/community_screen.dart'; // Implemented
+import 'package:hack_avensis/features/map/screens/map_screen.dart';
 import 'package:hack_avensis/features/sos/screens/sos_activation_screen.dart'; // Will create next
 
 class HomeScreen extends StatelessWidget {
@@ -138,10 +139,9 @@ class HomeScreen extends StatelessWidget {
                     label: "Community",
                     color: Colors.orange,
                     onTap: () {
-                      // Navigate to Community
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Community features coming soon!"),
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const CommunityScreen(),
                         ),
                       );
                     },

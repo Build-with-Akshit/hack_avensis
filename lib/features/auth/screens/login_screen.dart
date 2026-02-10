@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_avensis/core/constants/app_colors.dart';
 import 'package:hack_avensis/features/auth/services/auth_service.dart';
@@ -39,9 +40,14 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Login Failed: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Login Failed: ${e.message ?? e.toString()}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+        if (kDebugMode) print("LOGIN ERROR: $e");
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);

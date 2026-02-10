@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hack_avensis/core/constants/app_colors.dart';
 import 'package:hack_avensis/core/services/location_service.dart';
+import 'package:hack_avensis/features/sos/services/alert_service.dart';
 
 class SosActivationScreen extends StatefulWidget {
   const SosActivationScreen({super.key});
@@ -35,13 +36,19 @@ class _SosActivationScreenState extends State<SosActivationScreen> {
       final position = await LocationService().getCurrentLocation();
       final locationStr = "${position.latitude}, ${position.longitude}";
 
+      // Send to Firestore
+      await AlertService().createAlert(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              "SOS ALERT SENT!\nLocation: $locationStr\nNotifications dispatched.",
+              "SOS ALERT SENT!\nLocation: $locationStr\nHelp is on the way!",
             ),
-            duration: const Duration(seconds: 5),
+            duration: const Duration(seconds: 10),
             backgroundColor: AppColors.error,
           ),
         );
