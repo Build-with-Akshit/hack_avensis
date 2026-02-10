@@ -11,7 +11,7 @@ class AuthService {
   User? get currentUser => _auth.currentUser;
 
   // Sign in with Email and Password
-  Future<UserCredential?> signInWithEmail_Password(
+  Future<UserCredential?> signInWithEmailAndPassword(
     String email,
     String password,
   ) async {
@@ -32,7 +32,7 @@ class AuthService {
   }
 
   // Sign up with Email and Password
-  Future<UserCredential?> signUpWithEmail_Password(
+  Future<UserCredential?> signUpWithEmailAndPassword(
     String email,
     String password,
   ) async {

@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await _authService.signInWithEmail_Password(
+      await _authService.signInWithEmailAndPassword(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
-      await _authService.signUpWithEmail_Password(
+      await _authService.signUpWithEmailAndPassword(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
