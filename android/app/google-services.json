@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "320487047932",
+    "project_id": "flutter-gc-projects",
+    "storage_bucket": "flutter-gc-projects.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320487047932:android:a57e358b39fb754658cd79",
+        "android_client_info": {
+          "package_name": "com.example.hack_avensis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUlBHhWfH89x6Dc21bjQtIH9PCQQr_j0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
