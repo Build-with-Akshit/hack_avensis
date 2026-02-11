@@ -7,11 +7,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      # Ye naya step hai: Java install karne ke liye
+      # --- YEH STEP MISSING THA (IMPORTANT) ---
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '17' # Android builds ke liye Java 17 standard hai
+          java-version: '17' # Android builds ke liye Java 17 best hai
+      # ----------------------------------------
 
       - uses: subosito/flutter-action@v2
         with:
@@ -19,7 +20,7 @@ jobs:
       
       - run: flutter pub get
       
-      # Agar project purana hai toh --no-sound-null-safety rehne dein, warna hata dein
+      # Agar project purana nahi hai to '--no-sound-null-safety' hata sakte hain
       - run: flutter build apk --release --no-sound-null-safety
       
       - uses: actions/upload-artifact@v3
