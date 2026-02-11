@@ -4,10 +4,37 @@ import 'package:hack_avensis/features/auth/screens/login_screen.dart';
 import 'package:hack_avensis/features/auth/services/auth_service.dart';
 import 'package:hack_avensis/features/community/screens/community_screen.dart'; // Implemented
 import 'package:hack_avensis/features/map/screens/map_screen.dart';
-import 'package:hack_avensis/features/sos/screens/sos_activation_screen.dart'; // Will create next
+import 'package:hack_avensis/features/sos/screens/sos_activation_screen.dart';
+import 'package:hack_avensis/core/services/shake_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _shakeService = ShakeService();
+
+  @override
+  void initState() {
+    super.initState();
+    _shakeService.onShake = () {
+      if (mounted) {
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => const SosActivationScreen()));
+      }
+    };
+    _shakeService.startListening();
+  }
+
+  @override
+  void dispose() {
+    _shakeService.stopListening();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.green,
                             ),
                           ),
-                          Text("Tracking is active in background"),
+                          Text("Shake phone to trigger SOS"),
                         ],
                       ),
                     ),
@@ -105,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "TAP FOR HELP",
+                          "TAP OR SHAKE",
                           style: TextStyle(color: Colors.white70, fontSize: 14),
                         ),
                       ],
