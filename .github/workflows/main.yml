@@ -1,20 +1,28 @@
 name: Build APK
-on: [push] # Jab bhi code push hoga, ye chalega
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 # Code download karega
-      - uses: subosito/flutter-action@v2 # Flutter setup karega
+      - uses: actions/checkout@v3
+      
+      # Ye naya step hai: Java install karne ke liye
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17' # Android builds ke liye Java 17 standard hai
+
+      - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
       
-      - run: flutter pub get # Dependencies download karega
+      - run: flutter pub get
+      
+      # Agar project purana hai toh --no-sound-null-safety rehne dein, warna hata dein
       - run: flutter build apk --release --no-sound-null-safety
-        # Note: '--no-sound-null-safety' tabhi lagayein agar purane plugins ho
-
-      - uses: actions/upload-artifact@v3 # APK ko save karega
+      
+      - uses: actions/upload-artifact@v3
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
