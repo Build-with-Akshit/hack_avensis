@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'core/constants/app_colors.dart';
 // import 'firebase_options.dart'; // Will be added after user provides config
-import 'features/auth/screens/login_screen.dart';
+import 'features/home/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    debugPrint("Firebase initialization failed: $e");
+  }
   runApp(const CommunityShieldApp());
 }
 
@@ -24,7 +28,7 @@ class CommunityShieldApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // For now, we start at Login. In a real app with Firebase fully config'd, we'd use a StreamBuilder on authStateChanges
-      home: const LoginScreen(),
+      home: const HomeScreen(),
     );
   }
 }
