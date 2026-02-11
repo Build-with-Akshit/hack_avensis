@@ -1,0 +1,20 @@
+name: Build APK
+on: [push] # Jab bhi code push hoga, ye chalega
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 # Code download karega
+      - uses: subosito/flutter-action@v2 # Flutter setup karega
+        with:
+          channel: 'stable'
+      
+      - run: flutter pub get # Dependencies download karega
+      - run: flutter build apk --release --no-sound-null-safety
+        # Note: '--no-sound-null-safety' tabhi lagayein agar purane plugins ho
+
+      - uses: actions/upload-artifact@v3 # APK ko save karega
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
